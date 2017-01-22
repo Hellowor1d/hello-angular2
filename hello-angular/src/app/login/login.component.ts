@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 
 //传统方式引入authService
 import { AuthService } from '../core/auth.service';
+
+
 @Component({
   selector: 'app-login',
   template: `
@@ -16,18 +18,22 @@ import { AuthService } from '../core/auth.service';
         <button (click)="onClick(usernameRef.value, passwordRef.value)">Login</button>
     </div>
   `,
-  styles: []
+  styles: [],
+   //在providers中配置AuthService(为了使用依赖注入()的方式调用authservice)
+  providers:[AuthService]
 })
 export class LoginComponent implements OnInit {
 
-  //声明成员变量，其类型为AuthService
-  service: AuthService;
+  // 声明成员变量，其类型为AuthService
+  // service: AuthService;//在构造函数中将AuthService示例注入到成员变量service之后，注释掉
+
 //用传统方式调用service
   onClick(username, password) {
     console.log('auth result is: ' + this.service.loginWithCredentials(username, password))
   }
-  constructor() {
-    this.service = new AuthService();
+ //在构造函数中将AuthService示例注入到成员变量service中
+  //而且我们不需要显式声明成员变量service了
+  constructor(private service: AuthService) {
   }
 
   ngOnInit() {
