@@ -2,11 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
+import { AppRoutingModule } from './app-routing.module'
 import { AuthService } from './core/auth.service';
 
 @NgModule({
@@ -18,11 +17,7 @@ import { AuthService } from './core/auth.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([{
-      'path': 'login',
-      component: LoginComponent
-    }])
-    //forRoot其实是一个静态的工厂方法，它返回的仍然是Module
+    AppRoutingModule
   ],
   providers: [
     //把AuthService起了个别名auth，提供给全应用可用
