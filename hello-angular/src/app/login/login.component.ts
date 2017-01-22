@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 //@Component是Angular提供的装饰器函数，用来描述Compoent的元数据
 //其中selector是指这个组件的在HTML模板中的标签是什么
 //template是嵌入（inline）的HTML模板，如果使用单独文件可用templateUrl
 //styles是嵌入（inline）的CSS样式，如果使用单独文件可用styleUrls
-
-
-//传统方式引入authService
-import { AuthService } from '../core/auth.service';
 
 
 @Component({
@@ -18,22 +14,16 @@ import { AuthService } from '../core/auth.service';
         <button (click)="onClick(usernameRef.value, passwordRef.value)">Login</button>
     </div>
   `,
-  styles: [],
-   //在providers中配置AuthService(为了使用依赖注入()的方式调用authservice)
-  providers:[AuthService]
+  styles: []
 })
 export class LoginComponent implements OnInit {
-
-  // 声明成员变量，其类型为AuthService
-  // service: AuthService;//在构造函数中将AuthService示例注入到成员变量service之后，注释掉
 
 //用传统方式调用service
   onClick(username, password) {
     console.log('auth result is: ' + this.service.loginWithCredentials(username, password))
   }
- //在构造函数中将AuthService示例注入到成员变量service中
-  //而且我们不需要显式声明成员变量service了
-  constructor(private service: AuthService) {
+//我们去掉了service的类型声明，但加了一个修饰符@Inject('auth')，这个修饰符的意思是请到系统配置中找到名称为auth的那个依赖注入到我修饰的变量中。
+  constructor(@Inject('auth') private service) {
   }
 
   ngOnInit() {
