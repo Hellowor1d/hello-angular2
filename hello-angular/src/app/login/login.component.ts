@@ -10,17 +10,25 @@ import { Component, OnInit, Inject } from '@angular/core';
   template: `
     <div>
      <form  #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
-        <input  name="username" [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3"> {{usernameRef.errors | json}}
+      <fieldset ngModelGroup="login">
+        <input  placeholder="请输入用户名" name="username" [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3"> {{usernameRef.errors | json}}
         <div *ngIf="usernameRef.errors?.required">this is required</div>
         <div *ngIf="usernameRef.errors?.minlength">should be at least 3 charactors</div>
-        <input  name="password" [(ngModel)]="password" type="password" #passwordRef="ngModel" required> {{passwordRef.errors | json}}
+        <input   placeholder="请输入密码" name="password" [(ngModel)]="password" type="password" #passwordRef="ngModel" required> {{passwordRef.errors | json}}
          <div *ngIf="passwordRef.errors?.required">this is required</div>
-        <button (click)="onClick()">Login</button>
-         <button type="submit">Submit</button>
+         <button type="submit">Login</button>
+      </fieldset>
     </form>
     </div>
   `,
-  styles: []
+  styles: [`
+    .ng-invalid input{
+      border: 3px solid red;
+    }
+    .ng-valid input{
+      border: 3px solid green;
+    }
+  `]
 })
 export class LoginComponent implements OnInit {
 
@@ -35,12 +43,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClick(username, password) {
-    console.log('auth result is: ' + this.service.loginWithCredentials(this.username, this.password))
-  }
-
-    onSubmit(formValue) {
-    console.log(formValue);
+  onSubmit(formValue) {
+    console.log('auth result is: '
+      + this.service.loginWithCredentials(formValue.login.username, formValue.login.password));
   }
 
 }
