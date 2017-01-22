@@ -9,8 +9,11 @@ import { Component, OnInit, Inject } from '@angular/core';
   selector: 'app-login',
   template: `
     <div>
-        <input [(ngModel)]="username" type="text" #usernameRef="ngModel" required> {{usernameRef.errors | json}}
+        <input [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3"> {{usernameRef.errors | json}}
+        <div *ngIf="usernameRef.errors?.required">this is required</div>
+        <div *ngIf="usernameRef.errors?.minlength">should be at least 3 charactors</div>
         <input [(ngModel)]="password" type="password" #passwordRef="ngModel" required> {{passwordRef.errors | json}}
+         <div *ngIf="passwordRef.errors?.required">this is required</div>
         <button (click)="onClick()">Login</button>
     </div>
   `,
