@@ -11,10 +11,10 @@ import { Component, OnInit, Inject } from '@angular/core';
     <div>
      <form  #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
       <fieldset ngModelGroup="login">
-        <input  placeholder="请输入用户名" name="username" [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3"> {{usernameRef.errors | json}}
+        <input  placeholder="请输入用户名" name="username" [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3">
         <div *ngIf="usernameRef.errors?.required">this is required</div>
         <div *ngIf="usernameRef.errors?.minlength">should be at least 3 charactors</div>
-        <input   placeholder="请输入密码" name="password" [(ngModel)]="password" type="password" #passwordRef="ngModel" required> {{passwordRef.errors | json}}
+        <input   placeholder="请输入密码" name="password" [(ngModel)]="password" type="password" #passwordRef="ngModel" required>
          <div *ngIf="passwordRef.errors?.required">this is required</div>
          <button type="submit">Login</button>
       </fieldset>
