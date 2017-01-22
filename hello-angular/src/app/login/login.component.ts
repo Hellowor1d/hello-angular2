@@ -3,22 +3,32 @@ import { Component, OnInit } from '@angular/core';
 //其中selector是指这个组件的在HTML模板中的标签是什么
 //template是嵌入（inline）的HTML模板，如果使用单独文件可用templateUrl
 //styles是嵌入（inline）的CSS样式，如果使用单独文件可用styleUrls
+
+
+//传统方式引入authService
+import { AuthService } from '../core/auth.service';
 @Component({
   selector: 'app-login',
   template: `
     <div>
         <input #usernameRef type="text">
         <input #passwordRef type="password">
-        <button (click)="onClick(usernameRef.value)">Login</button>
+        <button (click)="onClick(usernameRef.value, passwordRef.value)">Login</button>
     </div>
   `,
   styles: []
 })
 export class LoginComponent implements OnInit {
-  onClick(username, password){
-    console.log("button was clicked,and "+username+" was input")
+
+  //声明成员变量，其类型为AuthService
+  service: AuthService;
+//用传统方式调用service
+  onClick(username, password) {
+    console.log('auth result is: ' + this.service.loginWithCredentials(username, password))
   }
-  constructor() { }
+  constructor() {
+    this.service = new AuthService();
+  }
 
   ngOnInit() {
   }
