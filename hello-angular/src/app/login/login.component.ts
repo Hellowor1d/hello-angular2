@@ -6,14 +6,18 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-login',
   template: `
-    <p>
-      login Works!
-    </p>
+    <div>
+        <input #usernameRef type="text">
+        <input #passwordRef type="password">
+        <button (click)="onClick(usernameRef.value)">Login</button>
+    </div>
   `,
   styles: []
 })
 export class LoginComponent implements OnInit {
-
+  onClick(username, password){
+    console.log("button was clicked,and "+username+" was input")
+  }
   constructor() { }
 
   ngOnInit() {
