@@ -9,24 +9,28 @@ import { Component, OnInit, Inject } from '@angular/core';
   selector: 'app-login',
   template: `
     <div>
-        <input #usernameRef type="text">
-        <input #passwordRef type="password">
-        <button (click)="onClick(usernameRef.value, passwordRef.value)">Login</button>
+        <input [(ngModel)]="username" type="text">
+        <input [(ngModel)]="password" type="password">
+        <button (click)="onClick()">Login</button>
     </div>
   `,
   styles: []
 })
 export class LoginComponent implements OnInit {
 
-//用传统方式调用service
-  onClick(username, password) {
-    console.log('auth result is: ' + this.service.loginWithCredentials(username, password))
-  }
+  username = "";
+  password = "";
+
+
 //我们去掉了service的类型声明，但加了一个修饰符@Inject('auth')，这个修饰符的意思是请到系统配置中找到名称为auth的那个依赖注入到我修饰的变量中。
   constructor(@Inject('auth') private service) {
   }
 
   ngOnInit() {
+  }
+
+  onClick(username, password) {
+    console.log('auth result is: ' + this.service.loginWithCredentials(this.username, this.password))
   }
 
 }
