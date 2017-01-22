@@ -28,6 +28,9 @@ import { Component, OnInit, Inject } from '@angular/core';
     .ng-valid input{
       border: 3px solid green;
     }
+    input:focus::-webkit-input-placeholder { color:transparent; }
+    input:focus:-moz-placeholder { color:transparent; }
+
   `]
 })
 export class LoginComponent implements OnInit {
