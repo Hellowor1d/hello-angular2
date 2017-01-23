@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Todo } from './todo.model';
 @Component({
   // 准确的说，moduleI指定，这是由于官方文档是使用System.js打包，而CLI是采用webpack打包造成的
   selector: 'app-todo',
@@ -8,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
 
+  todos: Todo[] = [];
+  desc = '';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+   addTodo(){
+    this.todos.push({id: 1, desc: this.desc, completed: false});
+    this.desc = '';
   }
 
 }
