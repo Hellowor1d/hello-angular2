@@ -19,7 +19,41 @@ export class TodoComponent implements OnInit {
   }
 
    addTodo(){
-    this.todos = this.service.addTodo(this.desc);
-    this.desc = '';
+    this.service
+    .addTodo(this.desc)
+    .then(todo => {
+      this.todos = [...this.todos,todo];
+      //...这个貌似省略号的东东是ES7中计划提供的Object Spread操作符，它的功能是将对象或数组“打散，拍平”
+      this.desc='';
+    })
+  }
+
+  toggleTodo(todo: Todo) {
+    const i = this.todos.indexOf(todo);
+    this.service
+      .toggleTodo(todo)
+      .then(t => {
+        this.todos = [
+          ...this.todos.slice(0,i),
+          t,
+          ...this.todos.slice(i+1)
+          ];
+      });
+  }
+  removeTodo(todo: Todo) {
+    const i = this.todos.indexOf(todo);
+    this.service
+      .deleteTodoById(todo.id)
+      .then(()=> {
+        this.todos = [
+          ...this.todos.slice(0,i),
+          ...this.todos.slice(i+1)
+        ];
+      });
+  }
+  getTodos(): void {
+    this.service
+      .getTodos()
+      .then(todos => this.todos = [...todos]);
   }
 }
