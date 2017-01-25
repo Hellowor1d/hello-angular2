@@ -22,5 +22,4 @@ export class TodoComponent implements OnInit {
     this.todos = this.service.addTodo(this.desc);
     this.desc = '';
   }
-
 }
