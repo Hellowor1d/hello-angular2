@@ -13,9 +13,9 @@ export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   desc = '';
 
-  constructor(private service:TodoService) { }
-
+  constructor(private service: TodoService) {}
   ngOnInit() {
+    this.getTodos();
   }
 
    addTodo(){
@@ -27,7 +27,7 @@ export class TodoComponent implements OnInit {
       this.desc='';
     })
   }
-
+//打开或关闭todo项
   toggleTodo(todo: Todo) {
     const i = this.todos.indexOf(todo);
     this.service
