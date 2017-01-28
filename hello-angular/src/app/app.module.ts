@@ -10,12 +10,16 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module'
 import { AuthService } from './core/auth.service';
 import { TodoComponent } from './todo/todo.component';
+import { TodoFooterComponent } from './todo/todo-footer/todo-footer.component';
+import { TodoHeaderComponent } from './todo/todo-header/todo-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TodoComponent
+    TodoComponent,
+    TodoFooterComponent,
+    TodoHeaderComponent
   ],
   imports: [
     BrowserModule,
