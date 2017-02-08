@@ -9,7 +9,8 @@ export class TodoService {
 
   //定义你的假WebAPI地址，这个定义成什么都无所谓
   //只要确保是无法访问的地址就好
-  private api_url = 'api/todo';
+  // private api_url = 'api/todo';
+  private api_url = 'http://localhost:3000/todos';
   private headers = new Headers({'Content-Type':'application/json'});
 
   constructor(private http: Http){};
@@ -25,7 +26,7 @@ export class TodoService {
     return this.http
     .post(this.api_url,JSON.stringify(todo), {headers: this.headers})
     .toPromise()
-    .then(res => res.json().data as Todo )
+    .then(res => res.json() as Todo )
     //还要一点需要强调的是：在用内存Web服务时，一定要注意res.json().data中的data属性必须要有，
     //因为内存web服务坑爹的在返回的json中加了data对象，你真正要得到的json是在这个data里面。
     .catch(this.handleError);
@@ -55,7 +56,7 @@ export class TodoService {
   getTodos(): Promise<Todo[]>{
     return this.http.get(this.api_url)
               .toPromise()
-              .then(res => res.json().data as Todo[])
+              .then(res => res.json() as Todo[])
               .catch(this.handleError);
   }
 
