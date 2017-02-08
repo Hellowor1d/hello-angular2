@@ -38,7 +38,9 @@ export class TodoService {
     console.log(url);
     let updatedTodo = Object.assign({}, todo, {completed: !todo.completed});
     return this.http
-            .put(url, JSON.stringify(updatedTodo), {headers: this.headers})
+            // .put(url, JSON.stringify(updatedTodo), {headers: this.headers})
+            .patch(url, JSON.stringify({completed: !todo.completed}), {headers: this.headers})
+            //如果你的web api是符合REST标准的话，我们可以用Http的PATCH方法而不是PUT方法，PATCH方法会只上传变化的数据
             .toPromise()
             .then(() => updatedTodo)
             .catch(this.handleError);
