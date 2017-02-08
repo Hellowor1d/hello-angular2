@@ -14,6 +14,7 @@ export const routes: Routes = [
   {
     path: 'todo',
     redirectTo: 'todo'
+    //无组件路由
   }
 ];
 
