@@ -61,15 +61,21 @@ toggleTodo(todo: Todo): Promise<void> {
         return null;
       });
   }
+// header输入内容，新加todo项
+   onTextChanges(value) {
+    this.desc = value;
+  }
+
   filterTodos(filter: string): void {
     this.service
       .filterTodos(filter)
       .then(todos => this.todos = [...todos]);
   }
-
+//反选
   toggleAll(){
     Promise.all(this.todos.map(todo => this.toggleTodo(todo)));
   }
+
   clearCompleted(){
     const completed_todos = this.todos.filter(todo => todo.completed === true);
     const active_todos = this.todos.filter(todo => todo.completed === false);
