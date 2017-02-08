@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Todo } from './todo.model';
+import { Todo } from '../domain/entities';
 
 
 //使用内存数据库，模拟接口返回数据

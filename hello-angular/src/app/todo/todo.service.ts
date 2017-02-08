@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo } from './todo.model';
+import { Todo } from '../domain/entities';
 import { UUID } from 'angular2-uuid';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
