@@ -6,14 +6,9 @@
       "completed": false
     },
     {
-      "id": "dd65a7c0-e24f-6c66-862e-0999ea504ca0",
-      "desc": "getting up",
-      "completed": false
-    },
-    {
       "id": "e89d582b-1a90-a0f1-be07-623ddb29d55e",
       "desc": "have to say good",
-      "completed": false
+      "completed": true
     }
   ]
 }
