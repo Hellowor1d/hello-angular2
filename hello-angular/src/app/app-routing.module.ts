@@ -1,7 +1,8 @@
+import { NgModule }     from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
@@ -14,9 +15,16 @@ export const routes: Routes = [
   {
     path: 'todo',
     redirectTo: 'todo/ALL'
-    //无组件路由
   }
 ];
 
-export const AppRoutingModule = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class AppRoutingModule {}
 

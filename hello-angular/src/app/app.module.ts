@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 // import { InMemoryTodoDbService } from './todo/todo-data';
 
 import { TodoModule } from './todo/todo.module';
-
+import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module'
@@ -29,8 +29,10 @@ import { AuthService } from './core/auth.service';
     HttpModule,
     // InMemoryWebApiModule.forRoot(InMemoryTodoDbService),
     AppRoutingModule,
-    TodoModule
+    TodoModule,
+    CoreModule
   ],
+
   providers: [
     //把AuthService起了个别名auth，提供给全应用可用
     //provide定义了这个服务的名称，有需要注入这个服务的就引用这个名称就好。useClass指明这个名称对应的服务是一个类，本例中就是AuthService了

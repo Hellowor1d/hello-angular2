@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Auth } from '../domain/entities';
 //@Component是Angular提供的装饰器函数，用来描述Compoent的元数据
 //其中selector是指这个组件的在HTML模板中的标签是什么
 //template是嵌入（inline）的HTML模板，如果使用单独文件可用templateUrl
@@ -14,6 +16,7 @@ import { Component, OnInit, Inject } from '@angular/core';
         <input  placeholder="请输入用户名" name="username" [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3">
         <div *ngIf="usernameRef.errors?.required">this is required</div>
         <div *ngIf="usernameRef.errors?.minlength">should be at least 3 charactors</div>
+        <div *ngIf="auth?.hasError">{{auth.errMsg}}</div>
         <input   placeholder="请输入密码" name="password" [(ngModel)]="password" type="password" #passwordRef="ngModel" required>
          <div *ngIf="passwordRef.errors?.required">this is required</div>
          <button type="submit">Login</button>
@@ -37,18 +40,25 @@ export class LoginComponent implements OnInit {
 
   username = "";
   password = "";
+  auth: Auth;
 
-
-//我们去掉了service的类型声明，但加了一个修饰符@Inject('auth')，这个修饰符的意思是请到系统配置中找到名称为auth的那个依赖注入到我修饰的变量中。
-  constructor(@Inject('auth') private service) {
-  }
+  //我们去掉了service的类型声明，但加了一个修饰符@Inject('auth')，这个修饰符的意思是请到系统配置中找到名称为auth的那个依赖注入到我修饰的变量中。
+  constructor(@Inject('auth') private service, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSubmit(formValue) {
-    console.log('auth result is: '
-      + this.service.loginWithCredentials(formValue.login.username, formValue.login.password));
+  onSubmit(formValue){
+    this.service
+      .loginWithCredentials(formValue.login.username, formValue.login.password)
+      .then(auth => {
+        let redirectUrl = (auth.redirectUrl === null)? '/': auth.redirectUrl;
+        if(!auth.hasError){
+          this.router.navigate([redirectUrl]);
+          localStorage.removeItem('redirectUrl');
+        } else {
+          this.auth = Object.assign({}, auth);
+        }
+      });
   }
-
 }
