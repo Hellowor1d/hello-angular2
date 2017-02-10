@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MdlModule } from 'angular2-mdl';
 // import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 // import { InMemoryTodoDbService } from './todo/todo-data';
 
@@ -26,6 +27,7 @@ import { AuthService } from './core/auth.service';
   imports: [
     BrowserModule,
     FormsModule,
+    MdlModule,
     HttpModule,
     // InMemoryWebApiModule.forRoot(InMemoryTodoDbService),
     AppRoutingModule,

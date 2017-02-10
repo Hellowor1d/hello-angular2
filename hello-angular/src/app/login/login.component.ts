@@ -10,19 +10,38 @@ import { Auth } from '../domain/entities';
 @Component({
   selector: 'app-login',
   template: `
-    <div>
-     <form  #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
-      <fieldset ngModelGroup="login">
-        <input  placeholder="请输入用户名" name="username" [(ngModel)]="username" type="text" #usernameRef="ngModel" required minlength="3">
-        <div *ngIf="usernameRef.errors?.required">this is required</div>
-        <div *ngIf="usernameRef.errors?.minlength">should be at least 3 charactors</div>
-        <div *ngIf="auth?.hasError">{{auth.errMsg}}</div>
-        <input   placeholder="请输入密码" name="password" [(ngModel)]="password" type="password" #passwordRef="ngModel" required>
-         <div *ngIf="passwordRef.errors?.required">this is required</div>
-         <button type="submit">Login</button>
-      </fieldset>
-    </form>
+<div>
+  <form (ngSubmit)="onSubmit()">
+    <mdl-textfield
+      type="text"
+      label="Username..."
+      name="username"
+      floating-label
+      required
+      [(ngModel)]="username"
+      #usernameRef="ngModel"
+      >
+    </mdl-textfield>
+    <div *ngIf="auth?.hasError" >
+      {{auth?.errMsg}}
     </div>
+    <mdl-textfield
+      type="password"
+      label="Password..."
+      name="password"
+      floating-label
+      required
+      [(ngModel)]="password"
+      #passwordRef="ngModel">
+    </mdl-textfield>
+    <button
+      mdl-button mdl-button-type="raised"
+      mdl-colored="primary"
+      mdl-ripple type="submit">
+      Login
+    </button>
+  </form>
+</div>
   `,
   styles: [`
     .ng-invalid input{
