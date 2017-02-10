@@ -62,22 +62,20 @@ export class LoginComponent implements OnInit {
   auth: Auth;
 
   //我们去掉了service的类型声明，但加了一个修饰符@Inject('auth')，这个修饰符的意思是请到系统配置中找到名称为auth的那个依赖注入到我修饰的变量中。
-  constructor(@Inject('auth') private service, private router: Router) { }
+  constructor( @Inject('auth') private service, private router: Router) { }
 
   ngOnInit() {
   }
-
-  onSubmit(){
+//针对observable对象作修改 subscribe
+  onSubmit() {
     this.service
       .loginWithCredentials(this.username, this.password)
-      .then(auth => {
-
-        let redirectUrl = (auth.redirectUrl === null)? '/': auth.redirectUrl;
-        if(!auth.hasError){
-          this.router.navigate([redirectUrl]);
-          localStorage.removeItem('redirectUrl');
-        } else {
-          this.auth = Object.assign({}, auth);
+      .subscribe(auth => {
+          // let redirectUrl = (auth.redirectUrl === null || auth.redirectUrl === undefined)
+        //   ? '/': auth.redirectUrl;
+        this.auth = Object.assign({}, auth);
+        if (!auth.hasError) {
+          this.router.navigate(['todo']);
         }
       });
   }
