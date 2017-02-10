@@ -67,10 +67,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(formValue){
+  onSubmit(){
     this.service
-      .loginWithCredentials(formValue.login.username, formValue.login.password)
+      .loginWithCredentials(this.username, this.password)
       .then(auth => {
+
         let redirectUrl = (auth.redirectUrl === null)? '/': auth.redirectUrl;
         if(!auth.hasError){
           this.router.navigate([redirectUrl]);
