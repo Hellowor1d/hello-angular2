@@ -13,9 +13,9 @@ export class BingImageService {
   });
 
   constructor(private http: Http) {
-    const q = '北极+墙纸';
+    const q = '火影忍者+桌面壁纸';
     const baseUrl: string = `https://api.cognitive.microsoft.com/bing/v5.0/images/search`;
-    this.imageUrl = baseUrl + `?q=${q}&count=5&mkt=zh-CN&imageType=Photo&size=Large`;
+    this.imageUrl = baseUrl + `?q=${q}&count=6&mkt=zh-CN&imageType=Photo&size=Large`;
   }
 
   getImageUrl(): Observable<Image[]>{

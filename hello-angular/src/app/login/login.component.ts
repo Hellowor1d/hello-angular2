@@ -149,7 +149,7 @@ export class LoginComponent implements OnDestroy {
     setInterval(() => {
       i = (i + 1) % length;
       this.photo = this.slides[i].contentUrl;
-    }, 4000);
+    }, 10000);
   }
   toggleLoginState(state: boolean) {
     this.loginBtnState = state ? 'active' : 'inactive';
